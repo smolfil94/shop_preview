@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="category-area bg-gray-4 pt-95 pb-100">
+    <div class="container">
+        <div class="section-title-2 st-border-center text-center mb-75" data-aos="fade-up" data-aos-delay="200">
+            <h2>Products Category</h2>
+        </div>
+        <div class="category-slider-active-2 swiper-container">
+            <div class="swiper-wrapper">
+                {% for category in categories %}
+                <div class="swiper-slide">
+                    <div class="single-category-wrap-2 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="category-img-2">
+                            <a href="{% url 'category_detail' category.slug %}">
+                                <img class="category-normal-img" src="{{ category.get_image_url }}" alt="{{ category.name }}">
+                                <!-- Замените category-hover-img на вашу логику, если есть альтернативное изображение -->
+                                <img class="category-hover-img" src="{{ category.get_image_url }}" alt="Hover image for {{ category.name }}">
+                            </a>
+                        </div>
+                        <div class="category-content-2 category-content-2-black">
+                            <h4><a href="{% url 'category_detail' category.slug %}">{{ category.name }}</a></h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

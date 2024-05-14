@@ -1,6 +1,7 @@
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Category, Color, Collection, Product, Size
 
@@ -9,57 +10,31 @@ class NewArrivalsView(View):
     template_name = 'new_arrivals.html'
 
     def get(self, request):
-        new_products = Product.objects.get('-date_added')[:10]
+        new_products = Product.objects.order_by('-date_added')[:10]
+
         context = {
-            'new_products': new_products
+            'new_products': new_products  # Передаем список новых продуктов в контекст
         }
         return render(request, self.template_name, context)
+
 
 
 class ProductListView(ListView):
     model = Product
     template_name = 'shop/shop.html'
     context_object_name = 'products'
+    paginate_by = 10  # Adjust the number of items per page as needed
 
     def get_queryset(self):
-        # Получаем текущий запрос к объектам модели Product
-        queryset = super().get_queryset()
-
-        # Получаем параметры фильтрации из GET-запроса
-        category_filter = self.request.GET.get('category')
-        size_filter = self.request.GET.get('size')
-        color_filter = self.request.GET.get('color')
-        min_price = self.request.GET.get('min_price')
-        max_price = self.request.GET.get('max_price')
-
-        # Применяем фильтры
-        if category_filter:
-            queryset = queryset.filter(category__name=category_filter)
-
-        if size_filter:
-            queryset = queryset.filter(size__name=size_filter)
-
-        if color_filter:
-            queryset = queryset.filter(color__name=color_filter)
-
-        if min_price:
-            queryset = queryset.filter(price__gte=min_price)
-
-        if max_price:
-            queryset = queryset.filter(price__lte=max_price)
-
-        return queryset
+        # This method is simplified without filter handling
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        context['sizes'] = Size.objects.all()
-        context['colors'] = Color.objects.all()
-        context['selected_category'] = self.request.GET.get('category')
-        context['selected_size'] = self.request.GET.get('size')
-        context['selected_color'] = self.request.GET.get('color')
-        context['selected_min_price'] = self.request.GET.get('min_price')
-        context['selected_max_price'] = self.request.GET.get('max_price')
+        paginator = Paginator(self.get_queryset(), self.paginate_by)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
         return context
 
 
@@ -78,4 +53,11 @@ class IndexView(View):
     template_name = 'index.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        categories = Category.objects.all()
+        print(categories)  # Проверьте вывод в консоли сервера
+        return render(request, self.template_name, {'categories': categories})
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+

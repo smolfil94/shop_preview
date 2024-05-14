@@ -3,6 +3,26 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
+    image = models.ImageField(
+        upload_to='products/',
+        blank=True,
+        null=True
+    )
+    slug = models.SlugField(
+        'Ключ',
+        max_length=100,
+        null=False,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return None
 
     def __str__(self):
         return self.name
@@ -45,6 +65,12 @@ class Product(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True, blank=True)
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE, null=True, blank=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+
+    def get_image_url(self):
+        """Возвращает полный URL для изображения продукта, если оно есть, иначе None."""
+        if self.image:
+            return self.image.url
+        return None
 
     def __str__(self):
         return self.name
