@@ -1,53 +1,29 @@
+{% load static %}
 <header class="header-area header-responsive-padding header-height-1">
-    <div class="header-top d-none d-lg-block bg-gray">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-6">
-                    <div class="welcome-text">
-                        <p>Default Welcome Msg! </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="header-bottom sticky-bar">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-6 col-6">
                     <div class="logo">
-                        <a href="{% url 'index' %}"><img src="/static/images/logo/logo.png" alt="logo"></a>
+                        <a href="{% url 'index' %}"><img src="{% static 'images_new/logo/logo3.png' %}" width="220px" height="40px"alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
                     <div class="main-menu text-center">
                         <nav>
                             <ul>
-                                <li><a href="{% url 'index' %}">HOME</a></li>
-                                <li><a href="{% url 'store' %}">SHOP</a>
+                                <li><a href="{% url 'index' %}">Главная</a></li>
+                                <li><a href="{% url 'store' %}">Все товары</a>
                                     <ul class="mega-menu-style mega-menu-mrg-1">
                                         <li>
                                             <ul>
                                                 <li>
-                                                    <a class="dropdown-title" href="#">Shop Layout</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">standard style</a></li>
-                                                        <li><a href="shop-sidebar.html">shop grid sidebar</a></li>
-                                                        <li><a href="shop-list.html">shop list style</a></li>
-                                                        <li><a href="shop-list-sidebar.html">shop list sidebar</a></li>
-                                                        <li><a href="shop-right-sidebar.html">shop right sidebar</a></li>
-                                                        <li><a href="shop-location.html">store location</a></li>
-                                                    </ul>
+                                                    <a class="dropdown-title" >Категории</a>
+                                                    {% include "all_categories.html" %}
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-title" href="#">Products Layout</a>
-                                                    <ul>
-                                                        <li><a href="product-details.html">tab style 1</a></li>
-                                                        <li><a href="product-details-2.html">tab style 2</a></li>
-                                                        <li><a href="product-details-gallery.html">gallery style </a></li>
-                                                        <li><a href="product-details-affiliate.html">affiliate style</a></li>
-                                                        <li><a href="product-details-group.html">group style</a></li>
-                                                        <li><a href="product-details-fixed-img.html">fixed image style </a></li>
-                                                    </ul>
+                                                    <a class="dropdown-title" href="all_collections.html">Коллекции</a>
+                                                    {% include "all_collections.html" %}
                                                 </li>
                                                 <li>
                                                     <a href="shop.html"><img src="/static/images/banner/menu.png" alt=""></a>
@@ -56,22 +32,22 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="#">PAGES</a>
-                                    <ul class="sub-menu-style">
-                                        <li><a href="about-us.html">about us </a></li>
-                                        <li><a href="cart.html">cart page</a></li>
-                                        <li><a href="checkout.html">checkout </a></li>
-                                        {% if user.is_authenticated %}
-                                            <li><a href="{% url 'profile' %}">my account</a></li>
-                                        {% endif %}
-                                        <li><a href="wishlist.html">wishlist </a></li>
-                                        <li><a href="compare.html">compare </a></li>
-                                        <li><a href="contact-us.html">contact us </a></li>
-                                        <li><a href="{% url 'login_register' %}">login / register </a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">ABOUT</a></li>
-                                <li><a href="contact-us.html">CONTACT US</a></li>
+<!--                                <li><a href="#">PAGES</a>-->
+<!--                                    <ul class="sub-menu-style">-->
+<!--                                        <li><a href="about-us.html">about us </a></li>-->
+<!--                                        <li><a href="cart.html">cart page</a></li>-->
+<!--                                        <li><a href="checkout.html">checkout </a></li>-->
+<!--                                        {% if user.is_authenticated %}-->
+<!--                                            <li><a href="{% url 'profile' %}">my account</a></li>-->
+<!--                                        {% endif %}-->
+<!--                                        <li><a href="wishlist.html">wishlist </a></li>-->
+<!--                                        <li><a href="compare.html">compare </a></li>-->
+<!--                                        <li><a href="contact-us.html">contact us </a></li>-->
+<!--                                        <li><a href="{% url 'login_register' %}">login / register </a></li>-->
+<!--                                    </ul>-->
+<!--                                </li>-->
+                                <li><a href="{% url 'about'%}">О Бренде</a></li>
+                                <li><a href="{% url 'contact'%}">Наши Контакты</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -90,26 +66,26 @@
                                 </form>
                             </div>
                         </div>
-                        {% if user.is_authenticated %}
-                        <div class="header-action-style">
-                            <a title="My Account" href='{% url 'profile'%}'><i class="pe-7s-user"></i></a>
-                        </div>
-                        {% else %}
-                        <div class="header-action-style">
-                            <a title="Login Register" href='{% url 'login_register'%}'><i class="pe-7s-user"></i></a>
-                        </div>
-                        {% endif %}
-                        <div class="header-action-style">
-                            <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
-                        </div>
-                        <div class="header-action-style header-action-cart">
-                            <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                <span class="product-count bg-black">01</span>
-                            </a>
-                        </div>
-                        <div class="header-action-style d-block d-lg-none">
-                            <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>
-                        </div>
+<!--                        {% if user.is_authenticated %}-->
+<!--                        <div class="header-action-style">-->
+<!--                            <a title="My Account" href="{% url 'profile'%}"><i class="pe-7s-user"></i></a>-->
+<!--                        </div>-->
+<!--                        {% else %}-->
+<!--                        <div class="header-action-style">-->
+<!--                            <a title="Login Register" href="{% url 'login_register' %}"><i class="pe-7s-user"></i></a>-->
+<!--                        </div>-->
+<!--                        {% endif %}-->
+<!--                        <div class="header-action-style">-->
+<!--                            <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>-->
+<!--                        </div>-->
+<!--                        <div class="header-action-style header-action-cart">-->
+<!--                            <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>-->
+<!--                                <span class="product-count bg-black">01</span>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="header-action-style d-block d-lg-none">-->
+<!--                            <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

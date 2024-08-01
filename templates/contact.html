@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contact-us-area pt-100 pb-65">
+    <div class="container">
+        <div class="section-title-4 text-center mb-50" data-aos="fade-up" data-aos-delay="200">
+            <h2>Адрес нашего магазина! Пожалуйста, посетите его.</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                <div class="contact-us-info-wrap mb-30" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-us-info-title">
+                        <h3>Это База</h3>
+                    </div>
+                    <div class="contact-us-info">
+                        <p>Россия, Москва, Большая Новодмитровская ул., 36, стр. 26, подъезд 5</p>
+                        <span>Телефон: +7 (936) 257-46-37</span>
+                    </div>
+                    <div class="contact-us-info">
+                        <p>График работы: Ежедневно, без выходных</p>
+                        <span>12:00 - 20:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                <div class="contact-us-info-wrap mb-30" data-aos="fade-up" data-aos-delay="400">
+                    <div class="contact-us-info">
+                        <img src="{% static 'images_new/shop/photo_2024-07-30_13-40-07.png'%}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="map pt-120" data-aos="fade-up" data-aos-delay="200">
+    <iframe src="https://yandex.ru/map-widget/v1/?ll=37.586268%2C55.805424&mode=search&oid=53397284353&ol=biz&z=18"></iframe>
+</div>
+{% endblock content %}

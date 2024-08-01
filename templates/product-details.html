@@ -2,65 +2,158 @@
 {% load static %}
 
 {% block content %}
-
-    <div class="product-details-area pb-100 pt-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="product-details-img-wrap" data-aos="fade-up" data-aos-delay="200">
-                        <div class="easyzoom-style">
-                            <div class="easyzoom easyzoom--overlay">
-                             <!-- в a href надо вставить большую фотографию 1000х10000 -->
-                                <a href="{% url 'product_detail' product_id=product.id %}">
-                                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                                </a>
-                            </div>
-                            <a class="easyzoom-pop-up img-popup" href="{{ product.image.url }}">
-                                <i class="pe-7s-search"></i>
+<div class="breadcrumb-area bg-gray-4 breadcrumb-padding-1">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>{{ product.name }}</h2>
+            <ul>
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                <li><i class="ti-angle-right"></i></li>
+                <li><a href="{% url 'category_detail' product.categories.slug%}">{{product.categories}}</a></li>
+                <li><i class="ti-angle-right"></i></li>
+                <li><a href="{% url 'index' %}">{{ product.name }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="breadcrumb-img-1">
+        <img src="{% static 'images/banner/breadcrumb-1.png' %}" alt="">
+    </div>
+    <div class="breadcrumb-img-2">
+        <img src="{% static 'images/banner/breadcrumb-2.png' %}" alt="">
+    </div>
+</div>
+<div class="product-details-area pb-100 pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-details-img-wrap" data-aos="fade-up" data-aos-delay="200">
+                    <div class="easyzoom-style">
+                        <div class="easyzoom easyzoom--overlay">
+                            <a href="{{ product.get_large_image_url }}">
+                                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
                             </a>
                         </div>
+                        <a class="easyzoom-pop-up img-popup" href="{{ product.get_large_image_url }}">
+                            <i class="pe-7s-search"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="product-details-content" data-aos="fade-up" data-aos-delay="400">
-                        <h2>{{ product.name }}</h2>
-                        <div class="product-details-price">
-                            <span class="new-price">{{ product.price }}</span>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-details-content" data-aos="fade-up" data-aos-delay="400">
+                    <h2>{{ product.name }}</h2>
+                    <div class="product-details-price">
+                        {% if product.old_price is not null %}
+                        <span class="old-price">{{ product.old_price }}</span>
+                        <span class="new-price">{{ product.price }}</span>
+                        {% else %}
+                        <span class="new-price">{{ product.price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="product-color product-color-active product-details-color">
+                        <span>Color :</span>
+                        <ul>
+                            {% for color in colors %}
+                            <li>
+                                <a
+                                        title="{{ color.name }}"
+                                        class="{{ color.name|lower }}"
+                                        href="#"
+                                        style="background-color: {{ color.hex_code }};">
+                                    {{ color.name }}
+                                </a>
+                            </li>
+                            {% empty %}
+                            <li>No colors available</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="product-color ">
+                        <ul>
+                            <li><span class="title">Размерный ряд:</span>
+                                <ul>
+                                    {% for size in sizes %}
+                                    <li>
+                                        {{ size.name }}{% if not forloop.last %}, {% endif %}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product-details-action-wrap">
+                        <div class="product-quality">
+                            <input class="cart-plus-minus-box input-text qty text" name="qtybutton" value="1">
                         </div>
-                        <div class="product-color product-color-active product-details-color">
-                            <span>Color :</span>
-                            <ul>
-                                <li><a title="Black" class="Black" href="#">Black</a></li>
-                                <li><a title="Yellow" class="active yellow" href="#">yellow</a></li>
-                                <li><a title="Purple" class="purple" href="#">purple</a></li>
-                            </ul>
+                        <div class="single-product-cart btn-hover">
+                            <a href="#">Add to cart</a>
                         </div>
-<!--                        <div class="product-details-action-wrap">-->
-<!--                            <div class="product-quality">-->
-<!--                                <input class="cart-plus-minus-box input-text qty text" name="qtybutton" value="1">-->
-<!--                            </div>-->
-<!--                            <div class="single-product-cart btn-hover">-->
-<!--                                <a href="#">Add to cart</a>-->
-<!--                            </div>-->
-<!--                            <div class="single-product-wishlist">-->
-<!--                                <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>-->
-<!--                            </div>-->
-<!--                            <div class="single-product-compare">-->
-<!--                                <a title="Compare" href="#"><i class="pe-7s-shuffle"></i></a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <div class="product-details-meta">
-                            <ul>
-                                <li><span class="title">Category:</span>
-                                    <ul>
-                                        <li><a href="#">{{ product.categories }}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div class="single-product-wishlist">
+                            <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
                         </div>
+                        <div class="single-product-compare">
+                            <a title="Compare" href="#"><i class="pe-7s-shuffle"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-details-meta">
+                        <ul>
+                            <li><span class="title">Категория:</span>
+                                <ul>
+                                    <li><a href="{% url 'category_detail' product.categories.slug%}">
+                                        {{ product.categories.name }}</a></li>
+                                </ul>
+                            </li>
+                            <li><span class="title">Коллекция:</span>
+                                <ul class="tag">
+                                    <li><a href="{% url 'collection_detail' product.collections.slug%}">{{ product.collections.name }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="description-review-area pb-85">
+    <div class="container">
+        <div class="description-review-topbar nav" data-aos="fade-up" data-aos-delay="200">
+            <a class="active" data-bs-toggle="tab" href="#des-details1"> Description </a>
+            <a data-bs-toggle="tab" href="#des-details2" class=""> Information </a>
+        </div>
+        <div class="tab-content">
+            <div id="des-details1" class="tab-pane active">
+                <div class="product-description-content text-center">
+                    <p data-aos="fade-up" data-aos-delay="400">{{ product.description|safe }}</p>
+                </div>
+            </div>
+            <div id="des-details2" class="tab-pane">
+                <div class="specification-wrap table-responsive">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td class="width1">Brands</td>
+                            <td>Petr Logachev</td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td class="width1">Коллекция</td>
+                            <td>{{ product.collections.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="width1">Цвета</td>
+                            <td>{{ product.colors.name_ru }}</td>
+                        </tr>
+                        <tr>
+                            <td class="width1">Размеры</td>
+                            <td>{% for size in sizes %} {{ size.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

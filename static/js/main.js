@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     /*--
     currency active
     -----------------------------------*/
@@ -8,7 +8,7 @@
         var $body2 = $('body'),
             $urdanDropdown2 = $('.currency-wrap'),
             $urdanDropdownMenu2 = $urdanDropdown2.find('.currency-dropdown');
-        $urdanDropdown2.on('click', '.currency-active', function(e) {
+        $urdanDropdown2.on('click', '.currency-active', function (e) {
             e.preventDefault();
             var $this = $(this);
             if (!$this.parent().hasClass('show')) {
@@ -18,7 +18,7 @@
             }
         });
         /*Close When Click Outside*/
-        $body2.on('click', function(e) {
+        $body2.on('click', function (e) {
             var $target = e.target;
             if (!$($target).is('.currency-wrap') && !$($target).parents().is('.currency-wrap') && $urdanDropdown2.hasClass('show')) {
                 $urdanDropdown2.removeClass('show');
@@ -26,7 +26,7 @@
             }
         });
     }
-    
+
     /*--
     language active
     -----------------------------------*/
@@ -34,7 +34,7 @@
         var $body3 = $('body'),
             $urdanDropdown3 = $('.language-wrap'),
             $urdanDropdownMenu3 = $urdanDropdown3.find('.language-dropdown');
-        $urdanDropdown3.on('click', '.language-active', function(e) {
+        $urdanDropdown3.on('click', '.language-active', function (e) {
             e.preventDefault();
             var $this = $(this);
             if (!$this.parent().hasClass('show')) {
@@ -44,7 +44,7 @@
             }
         });
         /*Close When Click Outside*/
-        $body3.on('click', function(e) {
+        $body3.on('click', function (e) {
             var $target = e.target;
             if (!$($target).is('.language-wrap') && !$($target).parents().is('.language-wrap') && $urdanDropdown3.hasClass('show')) {
                 $urdanDropdown3.removeClass('show');
@@ -52,10 +52,10 @@
             }
         });
     }
-    
+
     // Hero slider active
     var sliderActive = new Swiper('.slider-active', {
-        loop: true,
+        loop: false,
         speed: 750,
         effect: 'fade',
         slidesPerView: 1,
@@ -64,7 +64,7 @@
             prevEl: '.home-slider-prev , .home-slider-prev2 , .home-slider-prev3',
         }
     });
-    
+
     /*------ Timer active ----*/
     $('#timer-1-active').syotimer({
         year: 2021,
@@ -76,10 +76,10 @@
         periodic: false,
         periodUnit: 'd'
     });
-    
+
     // Product slider active 1
     var sliderActiveTwo = new Swiper('.product-slider-active-1', {
-        loop: true,
+        loop: false,
         spaceBetween: 30,
         navigation: {
             nextEl: '.product-next-1',
@@ -103,10 +103,10 @@
             }
         },
     });
-    
+
     // Brand logo active
     var sliderActiveThree = new Swiper('.brand-logo-active', {
-        loop: true,
+        loop: false,
         spaceBetween: 20,
         breakpoints: {
             320: {
@@ -123,11 +123,11 @@
             }
         },
     });
-    
-    
+
+
     // Category slider active
     var sliderActiveFour = new Swiper('.category-slider-active', {
-        loop: true,
+        loop: false,
         spaceBetween: 43,
         breakpoints: {
             320: {
@@ -144,10 +144,10 @@
             }
         },
     });
-    
+
     // Category slider active 2
     var sliderActiveFive = new Swiper('.category-slider-active-2', {
-        loop: true,
+        loop: false,
         spaceBetween: 30,
         slidesPerView: 6,
         breakpoints: {
@@ -168,10 +168,10 @@
             }
         },
     });
-    
+
     // Product slider active 2
     var sliderActiveSix = new Swiper('.product-slider-active-2', {
-        loop: true,
+        loop: false,
         spaceBetween: 30,
         breakpoints: {
             320: {
@@ -191,10 +191,10 @@
             }
         },
     });
-    
+
     // Testimonial active
     var sliderActiveSeven = new Swiper('.testimonial-active', {
-        loop: true,
+        loop: false,
         spaceBetween: 30,
         centeredSlides: true,
         breakpoints: {
@@ -217,14 +217,14 @@
             }
         },
     });
-    
+
     /*----------------------------
     	Cart Plus Minus Button
     ------------------------------ */
     var CartPlusMinus = $('.product-quality');
     CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
     CartPlusMinus.append('<div class="inc qtybutton">+</div>');
-    $(".qtybutton").on("click", function() {
+    $(".qtybutton").on("click", function () {
         var $button = $(this);
         var oldValue = $button.parent().find("input").val();
         if ($button.text() === "+") {
@@ -239,7 +239,7 @@
         }
         $button.parent().find("input").val(newVal);
     });
-    
+
     /*------ ScrollUp -------- */
     $.scrollUp({
         scrollText: '<i class=" ti-arrow-up "></i>',
@@ -247,13 +247,13 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-    
+
     /*-----------------
         Menu Stick
     -----------------*/
     var header = $('.sticky-bar');
     var $window = $(window);
-    $window.on('scroll', function() {
+    $window.on('scroll', function () {
         var scroll = $window.scrollTop();
         if (scroll < 200) {
             header.removeClass('stick');
@@ -261,60 +261,60 @@
             header.addClass('stick');
         }
     });
-    
+
     /*-------------------------------
 	   Header Search Toggle
     -----------------------------------*/
     var searchToggle = $('.search-toggle');
-    searchToggle.on('click', function(e){
+    searchToggle.on('click', function (e) {
         e.preventDefault();
-        if($(this).hasClass('open')){
-           $(this).removeClass('open');
-           $(this).siblings('.search-wrap-1').removeClass('open');
-        }else{
-           $(this).addClass('open');
-           $(this).siblings('.search-wrap-1').addClass('open');
+        if ($(this).hasClass('open')) {
+            $(this).removeClass('open');
+            $(this).siblings('.search-wrap-1').removeClass('open');
+        } else {
+            $(this).addClass('open');
+            $(this).siblings('.search-wrap-1').addClass('open');
         }
     })
-    
+
     /*====== SidebarCart ======*/
     function miniCart() {
         var navbarTrigger = $('.cart-active'),
             endTrigger = $('.cart-close'),
             container = $('.sidebar-cart-active'),
             wrapper = $('.main-wrapper');
-        
+
         wrapper.prepend('<div class="body-overlay"></div>');
-        
-        navbarTrigger.on('click', function(e) {
+
+        navbarTrigger.on('click', function (e) {
             e.preventDefault();
             container.addClass('inside');
             wrapper.addClass('overlay-active');
         });
-        
-        endTrigger.on('click', function() {
+
+        endTrigger.on('click', function () {
             container.removeClass('inside');
             wrapper.removeClass('overlay-active');
         });
-        
-        $('.body-overlay').on('click', function() {
+
+        $('.body-overlay').on('click', function () {
             container.removeClass('inside');
             wrapper.removeClass('overlay-active');
         });
     };
     miniCart();
-    
+
     /*====== product-color-active ======*/
-    $(".product-color-active ul li a").on('click', function(e) {
+    $(".product-color-active ul li a").on('click', function (e) {
         e.preventDefault();
         $(".product-color-active ul li a").removeClass("active");
         $(this).addClass("active");
     });
-    
+
     /*--------------------------
         Isotope active 1
     ---------------------------- */
-    $('.grid').imagesLoaded(function() {
+    $('.grid').imagesLoaded(function () {
         // init Isotope
         $('.grid').isotope({
             itemSelector: '.grid-item',
@@ -326,83 +326,84 @@
             }
         });
     });
-    
+
     /*---------------------
         Price range
     --------------------- */
     var sliderrange = $('#slider-range');
     var amountprice = $('#amount');
-    $(function() {
+    $(function () {
         sliderrange.slider({
             range: true,
-            min: 20,
-            max: 200,
-            values: [0, 160],
-            slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+            min: 0,
+            max: 100000,
+            values: [0, 100000],
+            slide: function (event, ui) {
+                amountprice.val( ui.values[0] + " - " + ui.values[1]);
             }
         });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
-    }); 
-    
-    
+        amountprice.val( sliderrange.slider("values", 0) +
+            " - " + sliderrange.slider("values", 1));
+    });
+
+
     /* NiceSelect */
     $('.nice-select').niceSelect();
-    
+
     /*---- CounterUp ----*/
     $('.count').counterUp({
         delay: 10,
         time: 2000
     });
-    
+
     /*---------------------
         Select active
     --------------------- */
     $('.select-two-active').select2();
-    $(window).on('resize', function(){
+    $(window).on('resize', function () {
         $('.select-two-active').select2()
     });
-    
+
     /*--- checkout toggle function ----*/
-    $('.checkout-click1').on('click', function(e) {
+    $('.checkout-click1').on('click', function (e) {
         e.preventDefault();
         $('.checkout-login-info').slideToggle(900);
     });
-    
-    
+
+
     /*--- checkout toggle function ----*/
-    $('.checkout-click3').on('click', function(e) {
+    $('.checkout-click3').on('click', function (e) {
         e.preventDefault();
         $('.checkout-login-info3').slideToggle(1000);
     });
-    
+
     /*-------------------------
     Create an account toggle
     --------------------------*/
-    $('.checkout-toggle2').on('click', function() {
+    $('.checkout-toggle2').on('click', function () {
         $('.open-toggle2').slideToggle(1000);
     });
-    
-    $('.checkout-toggle').on('click', function() {
+
+    $('.checkout-toggle').on('click', function () {
         $('.open-toggle').slideToggle(1000);
     });
-    
+
     /*-------------------------
     checkout one click toggle function
     --------------------------*/
-    var checked = $( '.sin-payment input:checked' )
-    if(checked){
-        $(checked).siblings( '.payment-box' ).slideDown(900);
-    };
-	 $( '.sin-payment input' ).on('change', function() {
-        $( '.payment-box' ).slideUp(900);
-        $(this).siblings( '.payment-box' ).slideToggle(900);
+    var checked = $('.sin-payment input:checked')
+    if (checked) {
+        $(checked).siblings('.payment-box').slideDown(900);
+    }
+    ;
+    $('.sin-payment input').on('change', function () {
+        $('.payment-box').slideUp(900);
+        $(this).siblings('.payment-box').slideToggle(900);
     });
-    
+
     // Instantiate EasyZoom instances
     var $easyzoom = $('.easyzoom').easyZoom();
-    
+
     /*----------------------------------------
 		Product details small img slider 1
     -----------------------------------------*/
@@ -430,7 +431,7 @@
             },
         }
     });
-    
+
     /*----------------------------------------
 		Product details big img slider 1
     -----------------------------------------*/
@@ -443,10 +444,10 @@
             swiper: productDetailsSmallOne
         }
     });
-    
+
     /*----------------------------------------
 		Product details small img slider 2
-    -----------------------------------------*/ 
+    -----------------------------------------*/
     var productDetailsSmallTwo = new Swiper('.product-details-small-img-slider-2', {
         loop: false,
         spaceBetween: 20,
@@ -473,7 +474,7 @@
             },
         }
     });
-    
+
     /*----------------------------------------
 		Product details big img slider 2
     -----------------------------------------*/
@@ -486,10 +487,10 @@
             swiper: productDetailsSmallTwo
         }
     });
-    
+
     // Related product active
     var relatedProductActive = new Swiper('.related-product-active', {
-        loop: true,
+        loop: false,
         spaceBetween: 30,
         breakpoints: {
             320: {
@@ -509,7 +510,7 @@
             }
         },
     });
-    
+
     /*-----------------------
         Image Popup active
     ------------------------*/
@@ -519,39 +520,39 @@
             enabled: true
         }
     });
-    
+
     /*====== mobile-menu active ======*/
     const slinky = $('#mobile-menu').slinky();
     const slinky2 = $('#mobile-currency').slinky();
     const slinky3 = $('#mobile-language').slinky();
-    
+
     /*====== off canvas active ======*/
     function mobileMainMenu() {
         var navbarTrigger = $('.mobile-menu-active-button'),
             endTrigger = $('.off-canvas-close'),
             container = $('.off-canvas-active'),
             wrapper = $('.main-wrapper-2');
-        
+
         wrapper.prepend('<div class="body-overlay-2"></div>');
-        
-        navbarTrigger.on('click', function(e) {
+
+        navbarTrigger.on('click', function (e) {
             e.preventDefault();
             container.addClass('inside');
             wrapper.addClass('overlay-active-2');
         });
-        
-        endTrigger.on('click', function() {
+
+        endTrigger.on('click', function () {
             container.removeClass('inside');
             wrapper.removeClass('overlay-active-2');
         });
-        
-        $('.body-overlay-2').on('click', function() {
+
+        $('.body-overlay-2').on('click', function () {
             container.removeClass('inside');
             wrapper.removeClass('overlay-active-2');
         });
     };
     mobileMainMenu();
-    
+
     /*-------------------------
       Scroll Animation
     --------------------------*/
@@ -559,6 +560,6 @@
         once: true,
         duration: 1000,
     });
-    
+
 })(jQuery);
 

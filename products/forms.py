@@ -5,4 +5,8 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'size', 'color', 'collection', 'categories']
+        fields = '__all__'
+        widgets = {
+            'sizes': forms.CheckboxSelectMultiple(),
+            'colors': forms.CheckboxSelectMultiple(),
+        }

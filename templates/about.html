@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="breadcrumb-area bg-gray-4 breadcrumb-padding-1">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h2 data-aos="fade-up" data-aos-delay="200">О Бренде</h2>
+                    <ul data-aos="fade-up" data-aos-delay="400">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><i class="ti-angle-right"></i></li>
+                        <li>О Бренде</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="breadcrumb-img-1" data-aos="fade-right" data-aos-delay="200">
+                <img src="static/images/banner/breadcrumb-1.png" alt="">
+            </div>
+            <div class="breadcrumb-img-2" data-aos="fade-left" data-aos-delay="200">
+                <img src="static/images/banner/breadcrumb-2.png" alt="">
+            </div>
+        </div>
+<div class="about-us-area pt-100 pb-100">
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6">
+                <div class="about-content text-center">
+                    <h2 data-aos="fade-up" data-aos-delay="200">Одежда</h2>
+                    <h1 data-aos="fade-up" data-aos-delay="300">Лучшая одежда</h1>
+                    <p data-aos="fade-up" data-aos-delay="400">Что - то про одежду</p>
+                    <p class="mrg-inc" data-aos="fade-up" data-aos-delay="500">продолжение.</p>
+                    <div class="btn-style-3 btn-hover" data-aos="fade-up" data-aos-delay="600">
+                        <a class="btn border-radius-none" href="{% url 'store' %}">Ознакомиться с ассортиментом</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-img" data-aos="fade-up" data-aos-delay="400">
+                    <img src="static/images/banner/about-us.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="testimonial-area pb-100">
+    <div class="container">
+        <div class="section-title-2 st-border-center text-center mb-75" data-aos="fade-up" data-aos-delay="200">
+            <h2>Отзывы</h2>
+        </div>
+        <div class="testimonial-active swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="single-testimonial" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-img">
+                            <img src="static/images/testimonial/client-1.png" alt="">
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectet adipisicing elit, sed do eiusmod tempo incididunt ut
+                            labore et dolore.</p>
+                        <div class="testimonial-info">
+                            <h4>Amrita Sha</h4>
+                            <span> Our Client.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="single-testimonial" data-aos="fade-up" data-aos-delay="400">
+                        <div class="testimonial-img">
+                            <img src="static/images/testimonial/client-2.png" alt="">
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectet adipisicing elit, sed do eiusmod tempo incididunt ut
+                            labore et dolore.</p>
+                        <div class="testimonial-info">
+                            <h4>Andi Lane</h4>
+                            <span> Designer.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="single-testimonial" data-aos="fade-up" data-aos-delay="600">
+                        <div class="testimonial-img">
+                            <img src="static/images/testimonial/client-1.png" alt="">
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectet adipisicing elit, sed do eiusmod tempo incididunt ut
+                            labore et dolore.</p>
+                        <div class="testimonial-info">
+                            <h4>Ted Ellison</h4>
+                            <span> Developer.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="single-testimonial">
+                        <div class="testimonial-img">
+                            <img src="static/images/testimonial/client-2.png" alt="">
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectet adipisicing elit, sed do eiusmod tempo incididunt ut
+                            labore et dolore.</p>
+                        <div class="testimonial-info">
+                            <h4>Aliah Pitts</h4>
+                            <span> Customer.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title-2 st-border-center text-center mb-75" data-aos="fade-up" data-aos-delay="200">
+            <h2>Наши сотрудники</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                <div class="single-team-wrap text-center mb-30" data-aos="fade-up" data-aos-delay="200">
+                    <img src="static/images/team/team-1.png" alt="">
+                    <div class="team-info-position">
+                        <div class="team-info">
+                            <h3>Kari Rasmus</h3>
+                            <span>Sales Man</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                <div class="single-team-wrap text-center mb-30" data-aos="fade-up" data-aos-delay="400">
+                    <img src="static/images/team/team-2.png" alt="">
+                    <div class="team-info-position">
+                        <div class="team-info">
+                            <h3>Kari Rasmus</h3>
+                            <span>Sales Man</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                <div class="single-team-wrap text-center mb-30" data-aos="fade-up" data-aos-delay="600">
+                    <img src="static/images/team/team-3.png" alt="">
+                    <div class="team-info-position">
+                        <div class="team-info">
+                            <h3>Kari Rasmus</h3>
+                            <span>Sales Man</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
