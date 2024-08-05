@@ -7,10 +7,11 @@
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="footer-widget footer-about mb-40">
                             <div class="footer-logo">
-                                <a href="{% url 'index' %}"><img src="{% static 'images_new/logo/logo2.png' %}"
+                                <a href="{% url 'index' %}"><img src="{% static 'images_new/logo/logo_footer.png' %}"
                                                               width="220" height="40"   alt="logo"></a>
                             </div>
                             <p>Это База - Одежда на каждый день.</p>
+
                             <!--                            <div class="payment-img">-->
                             <!--                                <a href="#"><img src="/static/images/icon-img/payment.png" alt="logo"></a>-->
                             <!--                            </div>-->
@@ -20,23 +21,21 @@
                         <div class="footer-widget footer-widget-margin-1 footer-list mb-40">
                             <h3 class="footer-title">О компании</h3>
                             <ul>
-                                <li><a href="about-us.html">О Бренде</a></li>
+                                <li><a href="{% url 'about' %}">О Бренде</a></li>
                             </ul>
+                            <h3 class="footer-title">Следите за нами</h3>
                             <ul>
-                                <li></li>
-                                <ul/>
-                                <h3 class="footer-title">Следите за нами</h3>
-                                <div class="social-icons">
-                                    <a href="https://vk.com/etobazashop" target="_blank">
-                                        <img src="{% static 'images_new/icon/vk.png' %}" alt="VK Icon">
-                                    </a>
-                                    <a href="https://t.me/nikismol" target="_blank">
-                                        <img src="{% static 'images_new/icon/telegram.png' %}" alt="Telegram Icon">
-                                    </a>
-                                    <a href="https://www.instagram.com/eto.baza?igsh=MXBvOWd2ZmFsbHNjbQ==" target="_blank">
-                                        <img src="{% static 'images_new/icon/instagram.png' %}" alt="Instagram Icon">
-                                    </a>
-                                </div>
+                                <a href="https://vk.com/etobazashop" target="_blank">
+                                    <img src="{% static 'images_new/icon/vk.png' %}" alt="VK Icon">
+                                </a>
+                                <a href="https://t.me/nikismol" target="_blank">
+                                    <img src="{% static 'images_new/icon/telegram.png' %}" alt="Telegram Icon">
+                                </a>
+                                <a href="https://www.instagram.com/eto.baza?igsh=MXBvOWd2ZmFsbHNjbQ=="
+                                   target="_blank">
+                                    <img src="{% static 'images_new/icon/instagram.png' %}" alt="Instagram Icon">
+                                </a>
+                            </ul>
                         </div>
                     </div>
 
@@ -44,9 +43,9 @@
                         <div class="footer-widget footer-list mb-40">
                             <h3 class="footer-title">Покупателям</h3>
                             <ul>
-                                <li><a href="my-account.html">Оплата</a></li>
+                                <li><a href="#">Оплата</a></li>
                                 <li><a href="#">Доставка</a></li>
-                                <li><a href="wishlist.html">Возврат</a></li>
+                                <li><a href="#">Возврат</a></li>
                                 <li><a href="#">Условия обслуживания</a></li>
                             </ul>
                         </div>
@@ -55,7 +54,7 @@
                         <div class="footer-widget footer-widget-margin-2 footer-address mb-40">
                             <h3 class="footer-title">Контактные данные</h3>
                             <ul>
-                                <li><span>Наш адрес: </span>Москва, Большая Новодмитровская ул., 36, стр. 26, подъезд 5
+                                <li><span>Наш адрес: </span>Москва, Большая Новодмитровская ул., 36с26, подъезд 5
                                 </li>
                                 <li><span>Телефон:</span> +7 (936) 257-46-37</li>
                                 <!--                                <li><span>Email: </span>demo@example.com</li>-->
@@ -73,7 +72,7 @@
     <div class="bg-gray-3">
         <div class="container">
             <div class="footer-bottom copyright text-center bg-gray-3">
-                <p>2020-2024 © Это База - Одежда на каждый день.</p>
+                <p>2024-{{ year }} © Это База - Одежда на каждый день.</p>
             </div>
         </div>
     </div>

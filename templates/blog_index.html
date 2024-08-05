@@ -1,0 +1,37 @@
+{% load static %}
+<div class="blog-area pb-70">
+    <div class="container">
+        <div class="section-title-2 st-border-center text-center mb-75" data-aos="fade-up" data-aos-delay="200">
+            <h2>Latest News</h2>
+        </div>
+        <div class="row">
+            {% for blog in new_blogs %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-wrap mb-30" data-aos="fade-up" data-aos-delay="200">
+                    <div class="blog-img-date-wrap mb-25">
+                        <div class="blog-img">
+                            <a href="{% url 'blog-details' blog.id %}"><img src="{{ blog.image.url }}" alt=""></a>
+                        </div>
+                        <div class="blog-date">
+                            <h5>{{ blog.pub_date|date:"d" }} <span>{{ blog.pub_date|date:"M" }}</span><span>{{ blog.pub_date|date:"Y" }}</span>
+                            </h5>
+
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <ul>
+                                <li>By:<a href="#"> {{blog.author.first_name }} {{blog.author.last_name }}</a></li>
+                            </ul>
+                        </div>
+                        <h3><a href="{% url 'blog-details' blog.id %}">{{ blog.truncated_text }}</a></h3>
+                        <div class="blog-btn">
+                            <a href="{% url 'blog-details' blog.id %}">Читать подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

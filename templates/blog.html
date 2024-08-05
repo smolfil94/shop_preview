@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-wrapper main-wrapper-2">
+    <div class="breadcrumb-area bg-gray-4 breadcrumb-padding-1">
+        <div class="container">
+            <div class="breadcrumb-content text-center">
+                <h2 data-aos="fade-up" data-aos-delay="200">Blog</h2>
+                <ul data-aos="fade-up" data-aos-delay="400">
+                    <li><a href="index.html">Home</a></li>
+                    <li><i class="ti-angle-right"></i></li>
+                    <li>Blog Standard</li>
+                </ul>
+            </div>
+        </div>
+        <div class="breadcrumb-img-1" data-aos="fade-right" data-aos-delay="200">
+            <img src="{% static 'images/banner/breadcrumb-1.png' %}" alt="">
+        </div>
+        <div class="breadcrumb-img-2" data-aos="fade-left" data-aos-delay="200">
+            <img src="{% static 'images/banner/breadcrumb-2.png' %}" alt="">
+        </div>
+    </div>
+    <div class="blog-area pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                {% for blog in blogs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-wrap mb-50" data-aos="fade-up" data-aos-delay="200">
+                        <div class="blog-img-date-wrap mb-25">
+                            <div class="blog-img">
+                                <a href="{% url 'blog-details' blog.id %}"><img src="{{ blog.image.url }}"
+                                                                                alt="Blog image"></a>
+                            </div>
+                            <div class="blog-date">
+                                <h5>{{ blog.pub_date|date:"d" }} <span>{{ blog.pub_date|date:"M" }}</span><span>{{ blog.pub_date|date:"Y" }}</span>
+                                </h5>
+
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <ul>
+                                    <li>By:<a href="#"> {{blog.author.first_name }} {{blog.author.last_name }}</a></li>
+                                </ul>
+                            </div>
+                            <h3><a href="{% url 'blog-details' blog.id  %}">{{ blog.header }}</a></h3>
+                            <p>{{ blog.truncated_text }}</p>
+                            <div class="blog-btn-2 btn-hover">
+                                <a class="btn hover-border-radius theme-color" href="{% url 'blog-details' blog.id %}">Читать
+                                    полностью</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="pagination-style-1" data-aos="fade-up" data-aos-delay="200">
+                <ul>
+                    {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}"><i
+                            class="ti-angle-double-left"></i></a></li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <li><a class="active" href="?page={{ num }}">{{ num }}</a></li>
+                    {% else %}
+                    <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li><a class="next" href="?page={{ page_obj.next_page_number }}"><i
+                            class="ti-angle-double-right"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

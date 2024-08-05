@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -69,6 +70,7 @@ class Collection(models.Model):
         null=False,
         unique=True
     )
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def get_image_url(self):
         if self.image:

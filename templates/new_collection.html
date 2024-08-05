@@ -1,0 +1,45 @@
+{% load custom_filters %}
+<div class="slider-area">
+    <div class="slider-active swiper-container">
+        <div class="swiper-wrapper">
+            {% for collection in new_collections %}
+                {% for product in collection.products.all %}
+                    <div class="swiper-slide">
+                        <div class="intro-section slider-height-1 slider-content-center bg-img single-animation-wrap slider-bg-color-1"
+                             style="background-image:url({{ product.get_image_url }})">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="slider-content-1 slider-animated-1">
+                                            <h3 class="animated">New Arrival</h3>
+                                            <h1 class="animated"> {% for collection in new_collections %}
+                                                {{ collection.name_part_1 }}<br>{{ collection.name_part_2 }}
+                                                {% endfor %}
+                                            </h1>
+                                            <div class="slider-btn btn-hover">
+                                                <a href="{% url 'collection_detail' product.collections.slug %}" class="btn animated">
+                                                    Shop Now <i class="ti-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="hero-slider-img-1 slider-animated-1">
+                                            {% if product.get_image_url %}
+                                            <a href="{% url 'product_detail' product_id=product.id %}">
+                                                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="home-slider-prev main-slider-nav"><i class="fa fa-angle-left"></i></div>
+        <div class="home-slider-next main-slider-nav"><i class="fa fa-angle-right"></i></div>
+    </div>
+</div>

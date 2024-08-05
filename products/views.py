@@ -3,8 +3,25 @@ from django.db.models import Count,  Q
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
+import re
+import random
 
 from .models import Category, Color, Collection, Product, Size
+from blogs.models import Blog
+from blogs.views import truncate_text
+
+
+class NewCollectionView(DetailView):
+    model = Collection
+    template_name = 'new_collection.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        collection = self.object
+        products = collection.products.all()[:5]
+        context['products'] = products
+        print('Context:', context)
+        return context
 
 
 class NewArrivalsView(View):
@@ -48,7 +65,6 @@ class ProductListView(ListView):
         selected_category = self.request.GET.get('category')
         selected_collection = self.request.GET.get('collection')
 
-        # Query for sizes and categories with their product counts in the current context
         filtered_queryset = self.get_queryset()
 
         sizes = Size.objects.annotate(
@@ -71,7 +87,6 @@ class ProductListView(ListView):
         return context
 
 
-
 class ProductDetailView(View):
     template_name = 'product-details.html'
 
@@ -79,10 +94,19 @@ class ProductDetailView(View):
         product = get_object_or_404(Product, pk=product_id)
         sizes = product.sizes.all()
         colors = product.colors.all()
+        category = product.categories
+
+        similar_products = Product.objects.filter(categories=category).exclude(pk=product_id)
+
+        similar_products = list(similar_products)
+        random.shuffle(similar_products)
+        similar_products = similar_products[:4]
+
         context = {
             'product': product,
             'sizes': sizes,
             'colors': colors,
+            'same_category_products': similar_products,
         }
         return render(request, self.template_name, context)
 
@@ -91,9 +115,34 @@ class IndexView(View):
     template_name = 'index.html'
 
     def get(self, request):
-        categories = Category.objects.filter(name__in=['Футболка','Шорты','Худи', 'Лонгсливы','Свитшоты'])
-        print(categories)  # Проверьте вывод в консоли сервера
-        return render(request, self.template_name, {'categories': categories})
+        categories = Category.objects.filter(name__in=['Футболка', 'Шорты', 'Худи', 'Лонгсливы', 'Свитшоты'])
+
+        new_arrivals = Product.objects.order_by('-date_added')[:8]
+
+        new_collections = Collection.objects.order_by('-created_date')[:1]
+
+        new_blogs = Blog.objects.order_by('-pub_date')[:3]
+
+        for collection in new_collections:
+            match = re.search(r'(.*)\s+(\S+)$', collection.name)
+            if match:
+                collection.name_part_1, collection.name_part_2 = match.groups()
+            else:
+                collection.name_part_1, collection.name_part_2 = collection.name, ''
+
+        new_collections_products = Product.objects.filter(collections=new_collections.first())[:5]
+        context = {
+            'categories': categories,
+            'new_arrivals': new_arrivals,
+            'new_collections': new_collections,
+            'new_collections_products': new_collections_products,
+            # 'popular_products': popular_products,
+            'new_blogs': new_blogs,
+        }
+        for new_blog in context['new_blogs']:
+            new_blog.truncated_text = truncate_text(new_blog.text, 50)
+
+        return render(request, self.template_name, context)
 
 
 class AllCategoriesView(ListView):
@@ -113,18 +162,14 @@ class CategoryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Получаем текущую категорию
         category = self.get_object()
 
-        # Добавляем все категории в контекст
-        all_categories = Category.objects.all()
+        all_categories = Category.objects.all().order_by('id')
         context['all_categories'] = all_categories
 
-        # Добавляем все продукты, связанные с текущей категорией, в контекст
         category_products = Product.objects.filter(categories=category)
 
-        # Пагинация продуктов
-        paginator = Paginator(category_products, 12)  # 12 продуктов на странице
+        paginator = Paginator(category_products, 12)
         page = self.request.GET.get('page')
 
         try:
@@ -135,9 +180,8 @@ class CategoryDetailView(DetailView):
             products = paginator.page(paginator.num_pages)
 
         context['category_products'] = products
-        context['page_obj'] = products  # Добавляем page_obj в контекст для шаблона
+        context['page_obj'] = products
 
-        # Вычисляем количество отображаемых продуктов
         start_index = products.start_index()
         end_index = products.end_index()
         total_count = paginator.count
@@ -154,7 +198,7 @@ class AllCollectionsView(ListView):
     context_object_name = 'collections'
 
     def get_queryset(self):
-        return Collection.objects.all()
+        return Collection.objects.all().order_by('id')
 
 
 class CollectionDetailView(DetailView):

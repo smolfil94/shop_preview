@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'users',
     'products',
     'carts',
+    'blogs'
 ]
 
 MIDDLEWARE = [
@@ -46,6 +47,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.categories_processor',
                 'products.context_processors.collections_processor',
+                'products.context_processors.year'
             ],
         },
     },
@@ -79,7 +81,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 

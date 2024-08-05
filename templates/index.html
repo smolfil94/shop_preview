@@ -2,5 +2,9 @@
 {% load static %}
 
 {% block content %}
-    {% include 'category_index.html' %}
+    {% load custom_filters %}
+    {% include 'new_collection.html' %}
+    {% include 'hot_products.html' %}
+    <!--{% include 'category_index.html' %}-->
+    {% include 'blog_index.html' %}
 {% endblock content %}
